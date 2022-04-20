@@ -13,7 +13,6 @@ const ProductsList = () => {
   const searchInput = useSelector(selectSearchInput);
   const categoryInput = useSelector(selectCategoryInput);
   useEffect(() => {
-    console.log("render");
     const setProducts = async () => {
       const products = await getProducts();
       setData(products);
@@ -21,18 +20,20 @@ const ProductsList = () => {
     setProducts();
   }, []);
 
-  const filteredProducts = data.filter(
-    (product) =>
-      product.name?.toLowerCase().includes(searchInput.toLowerCase()) &&
-      product.category
-        ?.toString()
-        .toLowerCase()
-        .includes(categoryInput.toLowerCase())
-  );
+  const filteredProduct = () => {
+    return data.filter(
+      (product) =>
+        product.name?.toLowerCase().includes(searchInput.toLowerCase()) &&
+        product.category?.toLowerCase().includes(categoryInput.toLowerCase())
+    );
+  };
+
+  const productsToShow =
+    searchInput || categoryInput ? filteredProduct() : data;
 
   return (
     <div className="max-w-3xl mx-auto my-10 grid gap-10 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-      {filteredProducts.map((product) => (
+      {productsToShow.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}
     </div>
