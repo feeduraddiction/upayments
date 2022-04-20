@@ -1,19 +1,11 @@
+import { ProductDetailsDescriptionPropTypes } from "@assets/types/componentsTypes";
+
 const ProductDetailsDescription = ({
   description,
-}: {
-  description: string;
-}) => {
+}: ProductDetailsDescriptionPropTypes) => {
   return (
     <div>
-      <hr
-        style={{
-          color: "black",
-          backgroundColor: "black",
-          height: 3,
-        }}
-
-        className="mb-5"
-      />
+      <hr className="mb-5 h-[3px] text-black  bg-black" />
       <h3 className="text-xl font-bold">Description</h3>
       <p>{description}</p>
     </div>

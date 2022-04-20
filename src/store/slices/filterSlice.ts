@@ -1,10 +1,6 @@
+import { filterState } from "@assets/types/storeTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/store";
-
-interface filterState {
-  searchInput: string;
-  categoryInput: string;
-}
 
 const initialState: filterState = {
   searchInput: "",

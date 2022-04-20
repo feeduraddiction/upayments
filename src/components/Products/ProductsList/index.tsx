@@ -1,5 +1,5 @@
-import { getProducts } from "@assets/functions";
-import { ProductPropTypes } from "@assets/types";
+import { getProducts } from "src/utils/http";
+import { ProductPropTypes } from "@assets/types/componentsTypes";
 import {
   selectCategoryInput,
   selectSearchInput,
@@ -12,16 +12,22 @@ const ProductsList = () => {
   const [data, setData] = useState<ProductPropTypes[]>([]);
   const searchInput = useSelector(selectSearchInput);
   const categoryInput = useSelector(selectCategoryInput);
-
   useEffect(() => {
-    getProducts().then((products) => setData(products));
+    console.log("render");
+    const setProducts = async () => {
+      const products = await getProducts();
+      setData(products);
+    };
+    setProducts();
   }, []);
 
   const filteredProducts = data.filter(
     (product) =>
-      product.name.toLowerCase().includes(searchInput.toLowerCase()) 
-      // &&
-      // product.category.toLowerCase().includes(categoryInput.toLowerCase())
+      product.name?.toLowerCase().includes(searchInput.toLowerCase()) &&
+      product.category
+        ?.toString()
+        .toLowerCase()
+        .includes(categoryInput.toLowerCase())
   );
 
   return (

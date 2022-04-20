@@ -1,8 +1,8 @@
-import { ProductPropTypes } from "@assets/types";
+import { ProductItemPropTypes } from "@assets/types/componentsTypes";
 import ProductItemImage from "./ProductItemImage";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ product }: { product: ProductPropTypes }) => {
+const ProductItem = ({ product }: ProductItemPropTypes) => {
   return (
     <Link to={`/details/${product.id}`}>
       <div className="h-auto w-full">

@@ -1,13 +1,12 @@
-import { getProduct } from "@assets/functions";
-import { ProductPropTypes } from "@assets/types";
+import { getProduct } from "src/utils/http";
+import {
+  ProductParamsPropTypes,
+  ProductPropTypes,
+} from "@assets/types/componentsTypes";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ProductDetailsDescription from "./ProductDetailsDescription";
 import ProductDetailsHeader from "./ProductDetailsHeader";
-
-type productParams = {
-  productID: string;
-};
 
 const ProductDetails = () => {
   const INIT_DATA = {
@@ -19,11 +18,15 @@ const ProductDetails = () => {
     developerEmail: "",
     id: 0,
   };
-  const { productID } = useParams<productParams>();
+  const { productID } = useParams<ProductParamsPropTypes>();
   const [data, setData] = useState<ProductPropTypes>(INIT_DATA);
 
   useEffect(() => {
-    getProduct(productID).then((product) => setData(product));
+    const setProduct = async () => {
+      const product = await getProduct(productID);
+      setData(product);
+    };
+    setProduct();
   }, []);
 
   return (

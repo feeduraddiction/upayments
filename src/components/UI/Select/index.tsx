@@ -1,26 +1,28 @@
-import { getCategories } from "@assets/functions";
-import { categoryPropTypes } from "@assets/types";
+import { getCategories } from "src/utils/http";
+import {
+  CategoryPropTypes,
+  SelectPropTypes,
+} from "@assets/types/componentsTypes";
 import { useEffect, useState } from "react";
 
-const Select = ({
-  onChangeCategory,
-}: {
-  onChangeCategory: (e: React.FormEvent<HTMLSelectElement>) => void;
-}) => {
-  const [data, setData] = useState<categoryPropTypes[]>([]);
+const Select = ({ onChangeCategory }: SelectPropTypes) => {
+  const [data, setData] = useState<CategoryPropTypes[]>([]);
 
   useEffect(() => {
-    getCategories().then((categories) => setData(categories));
+    const setCategories = async () => {
+      const categories = await getCategories();
+      setData(categories);
+    };
+    setCategories();
   }, []);
 
   return (
-    <div className="">
+    <div>
       <select
         required
         defaultValue=""
         placeholder="Categories"
         name="category"
-        id=""
         className="block text-gray-700 text-base font-normal h-10 w-64 px-5 rounded-lg shadow-md my-5"
         onChange={onChangeCategory}
       >

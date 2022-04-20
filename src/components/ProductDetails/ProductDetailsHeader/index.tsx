@@ -1,12 +1,10 @@
+import { ProductDetailsHeaderPropTypes } from "@assets/types/componentsTypes";
+
 const ProductDetailsHeader = ({
   avatar,
   name,
   price,
-}: {
-  avatar: string;
-  name: string;
-  price: number;
-}) => {
+}: ProductDetailsHeaderPropTypes) => {
   return (
     <div className="flex my-10">
       <img className="rounded-lg w-64" src={avatar} alt="" />
