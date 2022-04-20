@@ -16,11 +16,12 @@ const Select = ({
   return (
     <div className="">
       <select
+        required
         defaultValue=""
         placeholder="Categories"
         name="category"
         id=""
-        className="block text-gray-700 text-base font-normal h-10 w-64 px-5 rounded-lg shadow-md"
+        className="block text-gray-700 text-base font-normal h-10 w-64 px-5 rounded-lg shadow-md my-5"
         onChange={onChangeCategory}
       >
         <option value="">Categories</option>
